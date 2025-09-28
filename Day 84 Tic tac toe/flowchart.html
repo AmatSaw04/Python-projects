@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Pipeline for Non-Coding Variant Interpretation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        foreignObject div {
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-5xl border border-gray-200">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-2">Validation Workflow for an AI-Driven Pipeline</h1>
+        <p class="text-center text-gray-500 mb-8 sm:mb-12">Project Plan for Non-Coding BRCA1/2 Variant Analysis</p>
+
+        <svg id="flowchart" viewBox="0 0 800 1300" class="w-full">
+            <!-- Definitions -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#6B7280" />
+                </marker>
+                <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.08"/>
+                </filter>
+            </defs>
+
+            <!-- Inputs -->
+            <g transform="translate(220, 50)">
+                 <rect x="-150" y="-25" width="300" height="50" rx="10" fill="#F3F4F6" stroke="#D1D5DB"/>
+                 <text x="0" y="5" font-size="16" font-weight="600" text-anchor="middle" fill="#1F2937">Input 1: ClinVar Data</text>
+            </g>
+            <g transform="translate(580, 50)">
+                 <rect x="-150" y="-25" width="300" height="50" rx="10" fill="#F3F4F6" stroke="#D1D5DB"/>
+                 <text x="0" y="5" font-size="16" font-weight="600" text-anchor="middle" fill="#1F2937">Input 2: NA12878 Genome</text>
+            </g>
+
+            <!-- Arrows to Phase 1 -->
+            <line x1="220" y1="75" x2="400" y2="135" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)" />
+            <line x1="580" y1="75" x2="400" y2="135" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)" />
+
+
+            <!-- Phase 1 -->
+            <g transform="translate(400, 230)">
+                <rect x="-250" y="-85" width="500" height="170" rx="10" fill="#FEFCE8" stroke="#FBBF24" stroke-width="2" style="filter:url(#shadow)"/>
+                <foreignObject x="-240" y="-75" width="480" height="150">
+                    <div class="p-2 text-center">
+                        <div class="text-sm font-bold text-amber-700 bg-amber-200 rounded-full inline-block px-3 py-1 mb-3">PHASE 1: BENCHMARK CURATION</div>
+                        <div class="text-lg font-semibold text-amber-900 mb-2">Create the "Ground Truth" Test Set</div>
+                        <div class="text-sm text-amber-800 text-left space-y-1">
+                            <ul class="list-disc list-inside">
+                                <li>Extract all non-coding variants for BRCA1 & BRCA2 from ClinVar.</li>
+                                <li>Filter to create two distinct groups with high-confidence labels.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Outputs from Phase 1 -->
+            <line x1="400" y1="315" x2="400" y2="365" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)" />
+
+            <g transform="translate(400, 400)">
+                <rect x="-200" y="-25" width="400" height="50" rx="10" fill="#ECFDF5" stroke="#10B981"/>
+                <text x="0" y="5" font-size="14" font-weight="600" text-anchor="middle" fill="#065F46">Output: Curated Benchmark List</text>
+            </g>
+            <text x="400" y="440" text-anchor="middle" font-size="12" fill="#4B5563">(Positive & Negative Controls)</text>
+
+            <!-- Arrow to Phase 2 -->
+            <line x1="400" y1="450" x2="400" y2="500" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)" />
+
+            <!-- Phase 2 -->
+            <g transform="translate(400, 715)">
+                <rect x="-350" y="-205" width="700" height="410" rx="10" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" style="filter:url(#shadow)"/>
+                 <foreignObject x="-340" y="-195" width="680" height="390">
+                    <div class="p-4 text-center">
+                        <div class="text-sm font-bold text-blue-700 bg-blue-200 rounded-full inline-block px-3 py-1 mb-3">PHASE 2: PIPELINE VALIDATION (*in silico* experiment)</div>
+                        <div class="text-lg font-semibold text-blue-900 mb-3">For each variant in the Benchmark List:</div>
+                        <div class="text-sm text-blue-800 text-left space-y-4">
+
+                            <div>
+                                <p class="font-semibold text-base">1. Sequence Preparation:</p>
+                                <ul class="list-disc list-inside text-xs pl-4">
+                                    <li>Programmatically "spike-in" the variant into the NA12878 reference genome.</li>
+                                    <li>Generate two 1Mb DNA sequences: **Reference** and **Alternate (with variant)**.</li>
+                                </ul>
+                            </div>
+                             <div>
+                                <p class="font-semibold text-base">2. Prediction (The Core Test):</p>
+                                <ul class="list-disc list-inside text-xs pl-4">
+                                     <li>Run both sequences through the **AlphaGenome model**.</li>
+                                     <li>Perform a differential analysis of the outputs (splicing, expression, chromatin marks).</li>
+                                     <li>Calculate a final **Functional Impact Score** based on the difference.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-base">3. Hypothesis Testing:</p>
+                                 <ul class="list-disc list-inside text-xs pl-4">
+                                     <li>**Hypothesis 1:** Pathogenic variants will have a high Functional Impact Score.</li>
+                                     <li>**Hypothesis 2:** Benign variants will have a Functional Impact Score near zero.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Arrow to Final Analysis -->
+            <line x1="400" y1="920" x2="400" y2="970" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)" />
+
+             <!-- Final Analysis -->
+            <g transform="translate(400, 1035)">
+                <rect x="-250" y="-55" width="500" height="110" rx="10" fill="#FDF2F8" stroke="#DB2777" stroke-width="2" style="filter:url(#shadow)"/>
+                <foreignObject x="-240" y="-45" width="480" height="90">
+                    <div class="p-2 text-center">
+                        <div class="text-lg font-semibold text-pink-900 mb-2">Final Analysis & Quantification</div>
+                        <div class="text-sm text-pink-800 text-left space-y-1">
+                            <ul class="list-disc list-inside">
+                                <li>Aggregate all Functional Impact Scores from the pipeline.</li>
+                                <li>Correlate the scores with the original ClinVar classifications.</li>
+                                <li>Calculate performance metrics (e.g., AUROC) to quantify accuracy.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </foreignObject>
+            </g>
+
+            <!-- Arrow to End -->
+            <line x1="400" y1="1090" x2="400" y2="1140" stroke="#6B7280" stroke-width="2" marker-end="url(#arrowhead)" />
+
+            <!-- End Node -->
+            <g transform="translate(400, 1175)">
+                <rect x="-250" y="-25" width="500" height="50" rx="25" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+                <text x="0" y="5" font-size="16" font-weight="600" text-anchor="middle" fill="#1F2937">END: Validation Report & Manuscript</text>
+            </g>
+
+        </svg>
+    </div>
+</body>
+</html>
+
