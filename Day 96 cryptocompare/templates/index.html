@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter Character Search</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+        form { margin-bottom: 20px; }
+        input[type="text"] { width: 70%; padding: 8px; }
+        input[type="submit"] { padding: 8px 12px; }
+        .card { border: 1px solid #ccc; border-radius: 8px; padding: 16px; margin-top: 20px; }
+        .card img { max-width: 150px; float: left; margin-right: 15px; border-radius: 4px;}
+        .not-found { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Harry Potter Character Search 🧙</h1>
+
+    <form action="/" method="GET">
+        <input type="text" name="name" placeholder="e.g., Harry Potter" required>
+        <input type="submit" value="Search">
+    </form>
+
+    {% if searched %}
+        {% if character %}
+            <div class="card">
+                {% if character.image %}
+                    <img src="{{ character.image }}" alt="Image of {{ character.name }}">
+                {% endif %}
+                <h2>{{ character.name }}</h2>
+                <p><strong>House:</strong> {{ character.house or 'N/A' }}</p>
+                <p><strong>Actor:</strong> {{ character.actor or 'N/A' }}</p>
+                <p><strong>Ancestry:</strong> {{ character.ancestry or 'N/A' }}</p>
+            </div>
+        {% else %}
+            <p class="not-found">Character not found. Please try another name.</p>
+        {% endif %}
+    {% endif %}
+
+</body>
+</html>
